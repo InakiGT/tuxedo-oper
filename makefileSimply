@@ -1,0 +1,30 @@
+BIN=../bin
+OBJ=../objS
+RC=../src
+INC=../inc
+FML=../fml
+CC=cc
+# Generacion de Aplicacion
+all: simpserv simpl
+# Generacion de Servidores
+simpserv: $(OBJ)/simpserv.o
+    @echo Compilando el servidor simpserv
+    CC="$(CC)" buildserver -v -f $(OBJ)/simpserv.o \
+            - "-I$(INC)" \
+            -o $(BIN)/simpserv \
+            -s TOUPPER
+# Generacion de Cliente
+simpl: $(OBJ)/simpl.o
+    @echo Compilando el cliente simpl
+    CC="$(CC)" buildclient
+    -f $(OBJ)/simpl.o
+    -o $(BIN)/simpl
+# Generacion de Ficheros Objeto
+$(OBJ)/simpserv.o: $(SRC)/simpserv.c
+    $(CC) -c -I$(TUXDIR)/include -I$(INC) $(SRC)/simpserv.c -o
+$(OBJ)/simpserv.o$(OBJ)/simpl.o: $(SRC)/simpl.c
+    $(CC) -c -I$(TUXDIR)/include -I$(INC) $(SRC)/simpl.c -o $(OBJ)/simpl.o
+# Borrado
+clean:
+        rm $(OBJ)/*.o $(BIN)/simp*
+dellog:     rm ../logs/ULOG
