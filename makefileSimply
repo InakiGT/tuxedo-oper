@@ -17,7 +17,7 @@ simpserv: $(OBJ)/simpserv.o
     $(CC) buildserver -v -f $(OBJ)/simpserv.o \
             -f "-I$(INC)" \
             -o $(BIN)/simpserv \
-            -s TOUPPER
+            -s servCalcAreaTriaEqu
 # Generacion de Cliente
 simpl: $(OBJ)/simpl.o
     @echo Compilando el cliente simpl

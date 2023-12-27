@@ -18,6 +18,7 @@ LDBAL           Y
 
 *GROUPS 
 BIBLIO  LMID=f4d    GRPNO=10
+SIAT    LMID=f4d    GRPNO=11
 
 *SERVERS
 DEFAULT:        CLOPT="-A"  RESTART=Y   REPLYQ=Y
@@ -30,4 +31,4 @@ simpserv
                         MAX=2
 
 *SERVICES
-TOUPPE
+servCalcAreaTriaEqu
