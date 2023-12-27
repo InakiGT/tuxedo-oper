@@ -27,4 +27,4 @@ $(OBJ)/simpserv.o$(OBJ)/simpl.o: $(SRC)/simpl.c
 # Borrado
 clean:
         rm $(OBJ)/*.o $(BIN)/simp*
-dellog:     rm ../logs/ULOG
+dellog:     rm ../logs/ULOG*

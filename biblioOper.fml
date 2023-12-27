@@ -1,0 +1,5 @@
+#Nombre id  tipo    flag    comentario
+#
+OPERUN  2070    float   -   Operador uno
+OPERDO  2080    float   -   Operador dos
+RESUL   2090    float   -   Resultado
