@@ -262,8 +262,8 @@ int cliCalcProdCruz (float fvA_op1, float fvA_op2, float fvA_op3, float fvA_op4,
         return -1;
     }
 
-    printf("Llamamos al servicio 'cliCalcProdCruz'\n");
-    if (tpcall("cliCalcProdCruz", (char *)fbfr, 0, (char **)&fbfr, &lvL_tamLongt, 0L) == -1) {
+    printf("Llamamos al servicio 'servCalcProdCruz'\n");
+    if (tpcall("servCalcProdCruz", (char *)fbfr, 0, (char **)&fbfr, &lvL_tamLongt, 0L) == -1) {
         printf("Error en la llamada al servicio: tperrno = %d\n", tperrno);
         printf("Liberamos buffer y desconectamos de la aplicación\n");
         tpfree((char *)fbfr);
