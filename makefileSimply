@@ -14,16 +14,14 @@ campos_fml: $(FML)/biblioOper.fml
 
 simpserv: $(OBJ)/simpserv.o
     @echo Compilando el servidor simpserv
-    $(CC) buildserver -v -f $(OBJ)/simpserv.o \
+    $(CC) -v -f $(OBJ)/simpserv.o \
             -f "-I$(INC)" \
             -o $(BIN)/simpserv \
             -s servCalcAreaTriaEqu
 # Generacion de Cliente
 simpl: $(OBJ)/simpl.o
     @echo Compilando el cliente simpl
-    $(CC) buildclient
-            -f $(OBJ)/simpl.o
-            -o $(BIN)/simpl
+    $(CC) -f $(OBJ)/simpl.o -o $(BIN)/simpl
 # Generacion de Ficheros Objeto
 $(OBJ)/simpserv.o: $(SRC)/simpserv.c
     $(CC) -c -I$(TUXDIR)/include -I$(INC) $(SRC)/simpserv.c -o $(OBJ)/simpserv.o

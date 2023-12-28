@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 #include <atmi.h>
 #include <userlog.h>
 #include <fml32.h>
@@ -39,5 +40,99 @@ void servCalcAreaTriaEqu(TPSVCINFO *rqst) {
     userlog("Resultado de la suma es: [%f]", fvL_resul);
 
     tpreturn(TPSUCCESS, 0, rqst->data, 0L, 0);
+}
 
+
+void servCalcDistDosPtos(TPSVCINFO *rqst) {
+    float fvL_p1_x;
+    float fvL_p1_y;
+    float fvL_p1_z;
+    float fvL_p2_x;
+    float fvL_p2_y;
+    float fvL_p2_z;
+    float fvL_resul;
+    FBFR32* fbfr = (FBFR32*) rqst->data;
+
+    userlog("Servicio servCaclAreaTriaEqu Invocado.");
+
+    if (Fget32(fbfr, OPERUN, 0, (char *)&fvL_p1_x, 0) < 0) {
+        userlog("No se leyo la base");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERDO, 0, (char *)&fvL_p1_y, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERTRE, 0, (char *)&fvL_p1_z, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERCUA, 0, (char *)&fvL_p2_x, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERCIN, 0, (char *)&fvL_p2_y, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERSEI, 0, (char *)&fvL_p2_z, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    userlog("Punto 1 (%f, %f, %f)", fvL_p1_x, fvL_p1_y, fvL_p1_z);
+    userlog("Punto 2 (%f, %f %f)", fvL_p2_x, fvL_p2_y, fvL_p2_z);
+
+    fvL_resul = sqrt(pow(fvL_p1_x - fvL_p2_x, 2) + pow(fvL_p1_y - fvL_p2_y, 2) + pow(fvL_p1_z - fvL_p2_z, 2));
+
+    Fadd32 (fbfr, RESUL, (char *)&fvL_resul, 0);
+    userlog("Resultado de la suma es: [%f]", fvL_resul);
+
+    tpreturn(TPSUCCESS, 0, rqst->data, 0L, 0);
+}
+
+void servCalcProdCruz(TPSVCINFO *rqst) {
+    float fvL_a_x;
+    float fvL_a_y;
+    float fvL_b_x;
+    float fvL_b_y;
+    float fvL_resul;
+    FBFR32* fbfr = (FBFR32*) rqst->data;
+
+    userlog("Servicio servCaclAreaTriaEqu Invocado.");
+
+    if (Fget32(fbfr, OPERUN, 0, (char *)&fvL_a_x, 0) < 0) {
+        userlog("No se leyo la base");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERDO, 0, (char *)&fvL_a_y, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERTRE, 0, (char *)&fvL_b_x, 0) < 0) {
+        userlog("No se leyo la base");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    if (Fget32(fbfr, OPERCUA, 0, (char *)&fvL_b_y, 0) < 0) {
+        userlog("No se leyo la altura");
+        tpreturn(TPFAIL, 0, (char *)fbfr, 0L, 0);
+    }
+
+    userlog("Vector A: (%f, %f)", fvL_a_x, fvL_a_y);
+    userlog("Vector B: (%f, %f)", fvL_b_x, fvL_b_y);
+
+    fvL_resul = fvL_a_x * fvL_b_y - fvL_b_x * fvL_a_y;
+
+    Fadd32 (fbfr, RESUL, (char *)&fvL_resul, 0);
+    userlog("Resultado de la suma es: [%f]", fvL_resul);
+
+    tpreturn(TPSUCCESS, 0, rqst->data, 0L, 0);
 }

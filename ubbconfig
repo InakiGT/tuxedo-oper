@@ -32,3 +32,5 @@ simpserv
 
 *SERVICES
 servCalcAreaTriaEqu
+servCalcDistDosPtos
+servCalcProdCruz
