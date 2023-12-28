@@ -6,7 +6,9 @@
 #include <fml32.h>
 #include "biblioOper.fml.h"
 
-int cliCalcAreaEquOper(float fvA_base, float fvA_operaDos, float *fvA_resul);
+int cliCalcAreaEquOper(float fvA_op1, float fvA_op2, float fvA_op3, float fvA_op4, float fvA_op5, float fvA_op6, float *fvA_resul);
+int cliCalcDistDosPtos(float fvA_op1, float fvA_op2, float fvA_op3, float fvA_op4, float fvA_op5, float fvA_op6, float *fvA_resul);
+int cliCalcProdCruz(float fvA_op1, float fvA_op2, float fvA_op3, float fvA_op4, float fvA_op5, float fvA_op6, float *fvA_resul);
 
 typedef int (*opera) (float fvA_op1, float fvA_op2, float fvA_op3, float fvA_op4, float fvA_op5, float fvA_op6, float *fvA_resul);
 opera selecOperacion(int ivA_oper);
@@ -52,8 +54,10 @@ opera selecOperacion(int ivA_oper) {
         break;
     case 2:
         svL_obtOpera = cliCalcDistDosPtos;
+        break;
     case 3:
         svL_obtOpera = cliCalcProdCruz;
+        break;
     default:
         break;
     }
