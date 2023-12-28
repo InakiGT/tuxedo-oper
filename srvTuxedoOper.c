@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <math.h>
 #include <atmi.h>
 #include <userlog.h>
 #include <fml32.h>
@@ -88,7 +87,15 @@ void servCalcDistDosPtos(TPSVCINFO *rqst) {
     userlog("Punto 1 (%f, %f, %f)", fvL_p1_x, fvL_p1_y, fvL_p1_z);
     userlog("Punto 2 (%f, %f %f)", fvL_p2_x, fvL_p2_y, fvL_p2_z);
 
-    fvL_resul = sqrt(pow(fvL_p1_x - fvL_p2_x, 2) + pow(fvL_p1_y - fvL_p2_y, 2) + pow(fvL_p1_z - fvL_p2_z, 2));
+    float num = ((fvL_p1_x - fvL_p2_x) * (fvL_p1_x - fvL_p2_x)) + ((fvL_p1_y - fvL_p2_y) * (fvL_p1_y - fvL_p2_y)) + ((fvL_p1_z - fvL_p2_z) * (fvL_p1_z - fvL_p2_z));
+    float x = 1;
+    float y = (x + num / x) / 2;
+    float error_margin = 0.0001;
+    while (x - y > error_margin || y - x > error_margin) {
+        x = y;
+        y = (x + num / x) / 2;
+    }
+    fvL_resul = y;
 
     Fadd32 (fbfr, RESUL, (char *)&fvL_resul, 0);
     userlog("Resultado de la suma es: [%f]", fvL_resul);
